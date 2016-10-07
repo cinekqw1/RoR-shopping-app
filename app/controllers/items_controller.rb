@@ -11,7 +11,9 @@ before_action :find_item, only: [:show, :edit,:update,:destroy]
 
 
 	def new
-		@item = current_user.items.build
+		if user_signed_in?
+			@item = current_user.items.build
+		end
 	end
 
 	def create

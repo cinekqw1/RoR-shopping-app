@@ -1,5 +1,12 @@
-<%= simple_form_for @item do |f| %>
-  <%= f.input :title, label: "Item" %>
-  <%= f.input :description %>
-  <%= f.button :submit %>
-<% end %>
+
+<% if user_signed_in?%>
+	<%= simple_form_for @item do |f| %>
+	  <%= f.input :title, label: "Item" %>
+	  <%= f.input :description %>
+	  <%= f.button :submit %>
+	<% end %>
+
+<%else%>
+
+	<%= render 'layouts/static_home_page'%>
+<%end%> 

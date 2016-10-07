@@ -1,4 +1,4 @@
-<center><h1>index</h1></center>
+
 
 
 <%if user_signed_in? %>				
@@ -7,6 +7,10 @@
 		<h2><%= link_to item.title, item%></h2>
 		<p><%= item.description %></p>
 	<%end%>
+
+<%else%>
+
+<%= render 'layouts/static_home_page'%>
 <%end%>
 
 
