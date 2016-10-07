@@ -1,11 +1,12 @@
-<h1>index</h1>
+<center><h1>index</h1></center>
 
 
-<% @items.each do |item|%>
+<%if user_signed_in? %>				
+	<% @items.each do |item|%>
 
-	<h2><%= link_to item.title, item%></h2>
-	<p><%= item.description %></p>
+		<h2><%= link_to item.title, item%></h2>
+		<p><%= item.description %></p>
+	<%end%>
 <%end%>
 
 
-<%= link_to 'new', new_item_path%>
