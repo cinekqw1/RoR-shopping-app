@@ -4,8 +4,28 @@
 <%if user_signed_in? %>				
 	<% @items.each do |item|%>
 
+	<% if item.completed?%>
+
+
+
+		<h2 style="opacity: 0.5;"><strike><%= link_to item.title, item%></strike></h2>
+		<p style="opacity: 0.5;"><%= item.description %></p>
+		<p>Completed <%= time_ago_in_words(item.completed_at)%> ago </p>
+		<%= link_to "Mark as complete",complete_item_path(item), method: :patch%>
+		<%= link_to "Delete",item_path(item), method: :delete, data: {confirm: "Are you sure?"} %>
+	
+
+	<%else%>
+
 		<h2><%= link_to item.title, item%></h2>
 		<p><%= item.description %></p>
+		<p>Created at <%= time_ago_in_words(item.created_at)%> ago </p>
+		<%= link_to "Mark as complete",complete_item_path(item), method: :patch%>
+		<%= link_to "Delete",item_path(item), method: :delete, data: {confirm: "Are you sure?"} %>
+
+
+	<%end%>
+
 	<%end%>
 
 <%else%>
