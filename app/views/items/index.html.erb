@@ -1,36 +1,68 @@
 
 
 
-<%if user_signed_in? %>				
+<%if user_signed_in? %>		
+
+<div class="col-md-6 col-md-offset-3">		
+	
 	<% @items.each do |item|%>
 
-	<% if item.completed?%>
+		<% if item.completed?%>
 
+			
 
+			<div class="row item">
 
-		<h2 style="opacity: 0.5;"><strike><%= link_to item.title, item%></strike></h2>
-		<p style="opacity: 0.5;"><%= item.description %></p>
-		<p>Completed <%= time_ago_in_words(item.completed_at)%> ago </p>
-		<%= link_to "Mark as complete",complete_item_path(item), method: :patch%>
-		<%= link_to "Delete",item_path(item), method: :delete, data: {confirm: "Are you sure?"} %>
-	
+				<div class="col-md-8">
 
-	<%else%>
+					<h2 style="opacity: 0.5;"><strike><%= link_to item.title, item%></strike></h2>
+					<p style="opacity: 0.5;"><%= item.description %></p>
+					<p><i>Completed <%= time_ago_in_words(item.completed_at)%> ago </i></p>
 
-		<h2><%= link_to item.title, item%></h2>
-		<p><%= item.description %></p>
-		<p>Created at <%= time_ago_in_words(item.created_at)%> ago </p>
-		<%= link_to "Mark as complete",complete_item_path(item), method: :patch%>
-		<%= link_to "Delete",item_path(item), method: :delete, data: {confirm: "Are you sure?"} %>
+				</div>
+				<div class="col-md-2">
+					<%= link_to complete_item_path(item), method: :patch do %>
 
+						<i class="fa fa-lg fa-check"></i>
+					<%end%>
+				</div>
+				<div class="col-md-2">
+					<%= link_to item_path(item), method: :delete, data: {confirm: "Are you sure?"} do %>
+
+						<i class="fa fa-lg fa-trash"></i>
+					<%end%>
+				</div>
+			</div>
+		<%else%>
+
+			<div class="row item">
+				<div class="col-md-8">
+					<h2><%= link_to item.title, item%></h2>
+					<p><%= item.description %></p>
+					<p><i>Created at <%= time_ago_in_words(item.created_at)%> ago </i></p>
+				</div>
+				<div class="col-md-2">
+					<%= link_to complete_item_path(item), method: :patch do %>
+
+						<i class="fa fa-lg fa-check"></i>
+					<%end%>
+				</div>
+				<div class="col-md-2">
+					<%= link_to item_path(item), method: :delete, data: {confirm: "Are you sure?"} do %>
+
+					<i class="fa fa-lg fa-trash"></i>
+					<%end%>
+				</div>
+
+			</div>
+		<%end%>
 
 	<%end%>
-
-	<%end%>
+</div>
 
 <%else%>
 
-<%= render 'layouts/static_home_page'%>
+	<%= render 'layouts/static_home_page'%>
 <%end%>
 
 
