@@ -6,3 +6,4 @@ class Item < ApplicationRecord
 		!completed_at.blank?
 	end
 end
+ 

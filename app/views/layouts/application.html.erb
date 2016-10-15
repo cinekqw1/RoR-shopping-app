@@ -51,7 +51,7 @@
       <ul class="nav navbar-nav navbar-right">
       	<% if current_user.present? %>
 
-      		<p class="navbar-text">Logged in as:  <%= link_to current_user.email%></p> 
+      		<p class="navbar-text">		Logged in as:  <%= link_to current_user.email%></p> 
       		
       		<li><%= link_to "Sign out", destroy_user_session_path, method: :delete%></li>
       	<%else%>
