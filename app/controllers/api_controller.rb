@@ -2,11 +2,12 @@ class ApiController < ApplicationController
 
 skip_before_filter  :verify_authenticity_token
 before_action :restrict_access, only: [:items]
-#curl -H "Content-Type: application/json" -X POST -d '{"log_in": {"email":"admin@admin.pl","password":"adminadmin"}}' http://localhost:3000/api
+
 
 
 $current_token
 
+#curl -H "Content-Type: application/json" -X POST -d '{"log_in": {"email":"admin@admin.pl","password":"adminadmin"}}' http://localhost:3000/api
 	def login
 		
 		if @user = User.find_by_email(params[:log_in][:email])
@@ -31,9 +32,13 @@ $current_token
 
 	end
 
+
+	#curl -X POST -H "Authorization: Token token=e6628321336ecbbb91b1819848a10d14" http://localhost:3000/api/items
 	def items
-		
-		render json: {:status => "OK", :user_id => "#{$current_token.user_id}"}
+		@user = User.find_by_id($current_token.user_id)
+		@items = Item.where(:user_id => @user.id).order("created_at DESC")
+		render :json => 
+  			@items.to_json(:only => [:title, :description])
 
 	end
 
