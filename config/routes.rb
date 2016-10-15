@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   match '/api' => 'api#login', via: :post ,format: :json
   match '/api/items' => 'api#items', via: :post ,format: :json
+  match '/api/logout' => 'api#logout', via: :post ,format: :json
 end

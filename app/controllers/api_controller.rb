@@ -17,7 +17,7 @@ $current_token
 				@key_obj = ApiKey.new("user_id":@user.id)
 				
 				if @key_obj.save
-					render json: {:status => "OK", :token => @key_obj.access_token }
+					render json: {:status => "succesfull log in", :token => @key_obj.access_token }
 				else
 					render json: {:status => "create token error"}
 				end
@@ -40,6 +40,15 @@ $current_token
 		render :json => 
   			@items.to_json(:only => [:title, :description])
 
+	end
+
+	#curl -X POST -H "Authorization: Token token=c96044f1bce9a526513a5073d9ea9bcb" http://localhost:3000/api/logout
+
+	def logout
+
+		$current_token.destroy
+
+		render json: {:status => "succesfull log out"}
 	end
 
 
