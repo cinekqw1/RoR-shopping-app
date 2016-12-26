@@ -3,7 +3,10 @@
 	<%= simple_form_for @item do |f| %>
 	  <%= f.input :title, label: "Item" %>
 	  <%= f.input :description %>
-	  <%= f.input :category, :collection => ['January','February','December'] %>
+	  <%= f.input :category ,
+	  :collection => Category.where(:user_id => current_user.id),
+	  :value_method => :name,
+	  :include_blank => false %>
 	  <%= f.button :submit %>
 	<% end %>
 
@@ -11,3 +14,6 @@
 
 	<%= render 'layouts/static_home_page'%>
 <%end%> 
+
+
+ 

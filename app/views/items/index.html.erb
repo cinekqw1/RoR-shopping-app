@@ -17,6 +17,7 @@
 
 					<h2 style="opacity: 0.5;"><strike><%= link_to item.title, item%></strike></h2>
 					<p style="opacity: 0.5;"><%= item.description %></p>
+					<p style="opacity: 0.5;">Category: <%= item.category %></p>
 					<p><i>Completed <%= time_ago_in_words(item.completed_at)%> ago </i></p>
 
 				</div>
@@ -39,6 +40,7 @@
 				<div class="col-md-8">
 					<h2><%= link_to item.title, item%></h2>
 					<p><%= item.description %></p>
+					<p>Category: <%= item.category %></p>
 					<p><i>Created at <%= time_ago_in_words(item.created_at)%> ago </i></p>
 				</div>
 				<div class="col-md-4">

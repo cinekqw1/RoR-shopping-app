@@ -8,6 +8,7 @@ before_action :find_item, only: [:show, :edit,:update,:destroy]
 
 		if user_signed_in?
 			@items = Item.where(:user_id => current_user.id).order("created_at DESC")
+			@categories = Category.where(:user_id => current_user.id).order("created_at DESC")
 		end
 	end
 
@@ -59,7 +60,7 @@ before_action :find_item, only: [:show, :edit,:update,:destroy]
 private
 
 	def item_params
-		params.require(:item).permit(:title,:description)
+		params.require(:item).permit(:title,:description,:category)
 		
 	end
 
