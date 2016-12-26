@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   match '/api/createitem' => 'api#create_item', via: :post ,format: :json
   match '/api/destroy' => 'api#destroy', via: :post ,format: :json
   match '/api/complete' => 'api#complete', via: :post ,format: :json
+  match '/api/categories' => 'api#categories', via: :post ,format: :json
 end

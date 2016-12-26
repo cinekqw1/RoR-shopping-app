@@ -33,12 +33,12 @@ $current_token
 	end
 
 
-	#curl -X POST -H "Authorization: Token token=ed0a992aef6d7a1bedd54163d295ded8" http://localhost:3000/api/items
+	#curl -X POST -H "Authorization: Token token=ed0a992aef6d7a1bedd54163d295ded8" http://localhost:3000/api/items 
 	def items
 		@user = User.find_by_id($current_token.user_id)
 		@items = Item.where(:user_id => @user.id).order("created_at DESC")
 		render :json => 
-  			@items.to_json(:only => [:id, :title, :description, :completed_at])
+  			@items.to_json(:only => [:id, :title, :description, :category, :completed_at])
   			#@items.count
 	end
 
@@ -47,7 +47,7 @@ $current_token
 		@user = User.find_by_id($current_token.user_id)
 		
 		
-		@item = @user.items.build(params.require(:item).permit(:title,:description))
+		@item = @user.items.build(params.require(:item).permit(:title,:description,:category))
 		if @item.save
 			render json: {:status => "item created"}
 		else
@@ -87,6 +87,16 @@ $current_token
 
 		render json: {:status => "succesfull log out"}
 	end
+
+	def categories
+		@user = User.find_by_id($current_token.user_id)
+		@category = Category.where(:user_id => @user.id).order("created_at DESC")
+		render :json => 
+  			@category.to_json(:only => :name)
+  			
+	end
+
+
 
 
 private
